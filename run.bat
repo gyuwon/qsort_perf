@@ -22,3 +22,9 @@ echo|set /p=[C# Built-in x86]
 .\CSSortBuiltin\bin\x86\Release\CSSortBuiltin.exe
 echo|set /p=[C# Built-in x64] 
 .\CSSortBuiltin\bin\x64\Release\CSSortBuiltin.exe
+
+
+rem JavaScript
+
+echo|set /p=[JavaScript] 
+node .\JSSort\program.js
