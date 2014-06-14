@@ -46,7 +46,23 @@ namespace CSSort
             Quicksort(a, 0, n);
             stopwatch.Stop();
             var elapsed = stopwatch.Elapsed.TotalSeconds;
-            Console.WriteLine("{0}sec. elapsed.", elapsed);
+            if (IsSorted(a) == false)
+            {
+                throw new InvalidOperationException("Not sorted!");
+            }
+            Console.WriteLine("{0} sec elapsed.", elapsed);
+        }
+
+        private static bool IsSorted(int[] array)
+        {
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i - 1] > array[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

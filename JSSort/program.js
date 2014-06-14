@@ -50,6 +50,6 @@ function isSorted(a) {
   if (isSorted(a) !== true) {
     throw 'Not sorted!';
   }
-  console.log(elapsed + 'sec. elapsed.');
+  console.log(elapsed + ' sec elapsed.');
 })();
 

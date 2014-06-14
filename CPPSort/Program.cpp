@@ -5,6 +5,7 @@
 using namespace std;
 
 void quicksort(int *a, size_t n);
+bool is_sorted(int *a, size_t n);
 
 int main()
 {
@@ -20,7 +21,11 @@ int main()
 		auto begin = clock();
 		quicksort(a, n);
 		auto elapsed = double(clock() - begin) / CLOCKS_PER_SEC;
-		cout << elapsed << "sec. elapsed." << endl;
+		if (is_sorted(a, n) == false)
+		{
+			throw "Not sorted!";
+		}
+		cout << elapsed << " sec elapsed." << endl;
 		return 0;
 	}
 	__finally
@@ -56,4 +61,16 @@ void quicksort(int *a, size_t n)
 	}
 	quicksort(a, r - a + 1);
 	quicksort(l, a + n - l);
+}
+
+bool is_sorted(int *a, size_t n)
+{
+	for (size_t i = 1; i < n; i++)
+	{
+		if (a[i - 1] > a[i])
+		{
+			return false;
+		}
+	}
+	return true;
 }
