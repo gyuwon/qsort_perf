@@ -10,8 +10,8 @@ namespace CSSortBuiltin
         {
             var n = 1000000;
             var a = new int[n];
-            RandomNumber.Generate(a, 1);
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            RandomNumber.Generate(a, seed: 1);
+            var stopwatch = Stopwatch.StartNew();
             Array.Sort(a);
             stopwatch.Stop();
             var elapsed = stopwatch.Elapsed.TotalSeconds;

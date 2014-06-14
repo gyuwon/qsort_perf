@@ -41,8 +41,8 @@ namespace CSSort
         {
             var n = 1000000;
             var a = new int[n];
-            RandomNumber.Generate(a, 1);
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            RandomNumber.Generate(a, seed: 1);
+            var stopwatch = Stopwatch.StartNew();
             Quicksort(a, 0, n);
             stopwatch.Stop();
             var elapsed = stopwatch.Elapsed.TotalSeconds;
