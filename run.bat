@@ -32,5 +32,5 @@ node .\JSSort\program.js
 
 rem JavaScript Built-in
 
-echo|set /p=[JavaScript Built-in]
-node .\JSSort\program_builtin.js
+echo|set /p=[JavaScript Built-in] 
+node .\JSSort\program.js builtin

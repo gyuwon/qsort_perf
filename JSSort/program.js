@@ -40,12 +40,24 @@ function isSorted(a) {
 
 (function () {
   srand.seed(1);
-  var n = 1000000, a = new Array(n);
+  var n = 1000000, a = new Array(n), builtin = false, begin;
   for (var i = 0; i < n; i++) {
     a[i] = srand.rand();
   }
-  var begin = new Date();
-  quicksort(a, 0, n);
+  process.argv.forEach(function (arg) {
+    if (arg === 'builtin') {
+      builtin = true;
+	  return false;
+    }
+  });
+  if (builtin) {
+    begin = new Date();
+    a.sort(function (x, y) { return x - y; });
+  }
+  else {
+    begin = new Date();
+    quicksort(a, 0, n);
+  }
   var elapsed = (new Date() - begin) / 1000;
   if (isSorted(a) !== true) {
     throw 'Not sorted!';
