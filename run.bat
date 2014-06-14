@@ -28,3 +28,9 @@ rem JavaScript
 
 echo|set /p=[JavaScript] 
 node .\JSSort\program.js
+
+
+rem JavaScript Built-in
+
+echo|set /p=[JavaScript Built-in]
+node .\JSSort\program_builtin.js
