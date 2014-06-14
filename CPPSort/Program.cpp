@@ -1,16 +1,18 @@
 #include <iostream>
 #include <random>
 #include <ctime>
+#include <algorithm>
 
 using namespace std;
 
 void quicksort(int *a, size_t n);
 bool is_sorted(int *a, size_t n);
 
-int main()
+int main(size_t argc, char *argv[])
 {
 	const size_t n = 1000000;
 	auto a = new int[n];
+	auto builtin = false;
 	__try
 	{
 		srand(1);
@@ -18,8 +20,25 @@ int main()
 		{
 			a[i] = rand();
 		}
-		auto begin = clock();
-		quicksort(a, n);
+		clock_t begin;
+		for (size_t i = 0; i < argc; i++)
+		{
+			if (strcmp(argv[i], "builtin") == 0)
+			{
+				builtin = true;
+				break;
+			}
+		}
+		if (builtin)
+		{
+			begin = clock();
+			sort(a, a + n);
+		}
+		else
+		{
+			begin = clock();
+			quicksort(a, n);
+		}
 		auto elapsed = double(clock() - begin) / CLOCKS_PER_SEC;
 		if (is_sorted(a, n) == false)
 		{

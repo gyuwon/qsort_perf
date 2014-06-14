@@ -8,6 +8,15 @@ echo|set /p=[C++ x64]
 .\x64\Release\CPPSort.exe
 
 
+rem C++ Built-in
+
+echo|set /p=[C++ Built-in x86] 
+.\Release\CPPSort.exe builtin
+echo|set /p=[C++ Built-in x64] 
+.\x64\Release\CPPSort.exe builtin
+
+
+
 rem C#
 
 echo|set /p=[C# x86] 
