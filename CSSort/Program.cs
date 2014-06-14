@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using RandomGenerator;
 
 namespace CSSort
@@ -42,8 +43,17 @@ namespace CSSort
             var n = 1000000;
             var a = new int[n];
             RandomNumber.Generate(a, seed: 1);
-            var stopwatch = Stopwatch.StartNew();
-            Quicksort(a, 0, n);
+            var stopwatch = default(Stopwatch);
+            if (args.Contains("builtin", StringComparer.OrdinalIgnoreCase))
+            {
+                stopwatch = Stopwatch.StartNew();
+                Array.Sort(a);
+            }
+            else
+            {
+                stopwatch = Stopwatch.StartNew();
+                Quicksort(a, 0, n); 
+            }
             stopwatch.Stop();
             var elapsed = stopwatch.Elapsed.TotalSeconds;
             if (IsSorted(a) == false)

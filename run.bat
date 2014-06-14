@@ -19,9 +19,9 @@ echo|set /p=[C# x64]
 rem C# Built-in
 
 echo|set /p=[C# Built-in x86] 
-.\CSSortBuiltin\bin\x86\Release\CSSortBuiltin.exe
+.\CSSort\bin\x86\Release\CSSort.exe builtin
 echo|set /p=[C# Built-in x64] 
-.\CSSortBuiltin\bin\x64\Release\CSSortBuiltin.exe
+.\CSSort\bin\x64\Release\CSSort.exe builtin
 
 
 rem JavaScript
