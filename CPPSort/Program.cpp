@@ -7,50 +7,69 @@ using namespace std;
 
 void quicksort(int *a, size_t n);
 bool is_sorted(int *a, size_t n);
+clock_t run(int *a, size_t n, int seed, bool builtin);
 
 int main(size_t argc, char *argv[])
 {
 	const size_t n = 1000000;
-	auto a = new int[n];
 	auto builtin = false;
+	for (size_t i = 0; i < argc; i++)
+	{
+		if (strcmp(argv[i], "builtin") == 0)
+		{
+			builtin = true;
+			break;
+		}
+	}
+	auto a = new int[n];
 	__try
 	{
-		srand(1);
-		for (size_t i = 0; i < n; i++)
+		const int iter = 12, trim = 1;
+		clock_t elapsed[iter];
+		for (size_t i = 0; i < iter; i++)
 		{
-			a[i] = rand();
+			elapsed[i] = run(a, n, 1, builtin);
 		}
-		clock_t begin;
-		for (size_t i = 0; i < argc; i++)
+		sort(elapsed, elapsed + iter);
+		clock_t sum = 0;
+		for (size_t i = trim; i < iter - trim * 2; i++)
 		{
-			if (strcmp(argv[i], "builtin") == 0)
-			{
-				builtin = true;
-				break;
-			}
+			sum += elapsed[i];
 		}
-		if (builtin)
-		{
-			begin = clock();
-			sort(a, a + n);
-		}
-		else
-		{
-			begin = clock();
-			quicksort(a, n);
-		}
-		auto elapsed = double(clock() - begin) / CLOCKS_PER_SEC;
-		if (is_sorted(a, n) == false)
-		{
-			throw "Not sorted!";
-		}
-		cout << elapsed << " sec elapsed." << endl;
+		auto mean = double(sum) / (iter - trim * 2) / CLOCKS_PER_SEC * 1000;
+		cout << mean << " ms elapsed." << endl;
 		return 0;
 	}
 	__finally
 	{
 		delete[] a;
 	}
+}
+
+clock_t run(int *a, size_t n, int seed, bool builtin)
+{
+	srand(seed);
+	for (size_t i = 0; i < n; i++)
+	{
+		a[i] = rand();
+	}
+	clock_t begin;
+	if (builtin)
+	{
+		begin = clock();
+		sort(a, a + n);
+	}
+	else
+	{
+		begin = clock();
+		quicksort(a, n);
+	}
+	auto elapsed = clock() - begin;
+	if (is_sorted(a, n) == false)
+	{
+		throw "Not sorted!";
+	}
+	return elapsed;
 }
 
 void quicksort(int *a, size_t n)

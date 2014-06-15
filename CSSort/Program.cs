@@ -42,9 +42,24 @@ namespace CSSort
         {
             var n = 1000000;
             var a = new int[n];
-            RandomNumber.Generate(a, seed: 1);
+            var builtin = args.Contains("builtin", StringComparer.OrdinalIgnoreCase);
+            var iter = 12;
+            var trim = 1;
+            var elapsed = new double[iter];
+            for (int i = 0; i < iter; i++)
+            {
+                elapsed[i] = Run(a, 1, builtin);
+            }
+            Array.Sort(elapsed);
+            var mean = elapsed.Skip(trim).Take(iter - trim * 2).Average();
+            Console.WriteLine("{0} ms elapsed.", mean);
+        }
+
+        private static double Run(int[] a, int seed, bool builtin)
+        {
+            RandomNumber.Generate(a, seed);
             var stopwatch = default(Stopwatch);
-            if (args.Contains("builtin", StringComparer.OrdinalIgnoreCase))
+            if (builtin)
             {
                 stopwatch = Stopwatch.StartNew();
                 Array.Sort(a);
@@ -52,15 +67,15 @@ namespace CSSort
             else
             {
                 stopwatch = Stopwatch.StartNew();
-                Quicksort(a, 0, n); 
+                Quicksort(a, 0, a.Length);
             }
             stopwatch.Stop();
-            var elapsed = stopwatch.Elapsed.TotalSeconds;
+            var elapsed = stopwatch.Elapsed.TotalMilliseconds;
             if (IsSorted(a) == false)
             {
                 throw new InvalidOperationException("Not sorted!");
             }
-            Console.WriteLine("{0} sec elapsed.", elapsed);
+            return elapsed;
         }
 
         private static bool IsSorted(int[] array)

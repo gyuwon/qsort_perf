@@ -38,18 +38,13 @@ function isSorted(a) {
   return true;
 }
 
-(function () {
-  srand.seed(1);
-  var n = 1000000, a = new Array(n), builtin = false, begin;
+function run(a, seed, builtin) {
+  srand.seed(seed);
+  var n = a.length
   for (var i = 0; i < n; i++) {
     a[i] = srand.rand();
   }
-  process.argv.forEach(function (arg) {
-    if (arg === 'builtin') {
-      builtin = true;
-	  return false;
-    }
-  });
+  var begin;
   if (builtin) {
     begin = new Date();
     a.sort(function (x, y) { return x - y; });
@@ -58,10 +53,30 @@ function isSorted(a) {
     begin = new Date();
     quicksort(a, 0, n);
   }
-  var elapsed = (new Date() - begin) / 1000;
+  var elapsed = new Date() - begin;
   if (isSorted(a) !== true) {
     throw 'Not sorted!';
   }
-  console.log(elapsed + ' sec elapsed.');
+  return elapsed;
+}
+
+(function () {
+  var n = 1000000, a = new Array(n), builtin = false;
+  process.argv.forEach(function (arg) {
+    if (arg === 'builtin') {
+      builtin = true;
+	  return false;
+    }
+  });
+  var iter = 12, trim = 1, elapsed = new Array(iter), sum = 0, i;
+  for (i = 0; i < iter; i++) {
+  	elapsed[i] = run(a, 1, builtin);
+  }
+  elapsed.sort(function (x, y) { return x - y; });
+  for (i = trim; i < iter - trim * 2; i++) {
+  	sum += elapsed[i];
+  }
+  var mean = sum / (iter - trim * 2);
+  console.log(mean + ' ms elapsed.');
 })();
 
