@@ -29,27 +29,27 @@ function quicksort(a, start, end) {
 }
 
 function quicksortThreeway(a, start, end) {
-    if (end - start < 2) {
-      return;
+  if (end - start < 2) {
+    return;
+  }
+  var p = a[start];
+  var l = start;
+  var m = l + 1;
+  var i = m;
+  while (i < end) {
+    if (a[i] < p) {
+      a[l++] = a[i];
+      a[i] = a[m];
+      a[m++] = p;
     }
-    var p = a[start];
-    var l = start;
-    var m = l + 1;
-    var i = m;
-    while (i < end) {
-      if (a[i] < p) {
-        a[l++] = a[i];
-        a[i] = a[m];
-        a[m++] = p;
-      }
-      else if (a[i] == p) {
-        a[i] = a[m];
-        a[m++] = p;
-      }
-      ++i;
+    else if (a[i] == p) {
+      a[i] = a[m];
+      a[m++] = p;
     }
-    quicksortThreeway(a, start, l);
-    quicksortThreeway(a, m, end);
+    ++i;
+  }
+  quicksortThreeway(a, start, l);
+  quicksortThreeway(a, m, end);
 }
 
 function isSorted(a) {
