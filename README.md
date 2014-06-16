@@ -30,16 +30,27 @@
 다음과 유사한 결과가 출력됩니다.
 
 ```text
-[C++ x86] 56.5 ms elapsed.
-[C++ Built-in x86] 64.2 ms elapsed.
-[C++ x64] 56.5 ms elapsed.
-[C++ Built-in x64] 61 ms elapsed.
-[C# x86] 84.02835 ms elapsed.
-[C# Built-in x86] 86.42417 ms elapsed.
-[C# x64] 81.10581 ms elapsed.
-[C# Built-in x64] 67.99592 ms elapsed.
-[Java] 98.5 ms elapsed.
-[Java Built-in] 67.0 ms elapsed.
-[Node.js] 110.9 ms elapsed.
-[Node.js Built-in] 196.8 ms elapsed.
+[C++ x86] 60.1 ms elapsed.
+[C++ x86 3-way] 66.6 ms elapsed.
+[C++ x86 Built-in] 65.7 ms elapsed.
+
+[C++ x64] 61.5 ms elapsed.
+[C++ x64 3-way Built-in] 62.6 ms elapsed.
+[C++ x64 Built-in] 61.8 ms elapsed.
+
+[C# x86] 95.76737 ms elapsed.
+[C# x86 3-way] 95.08319 ms elapsed.
+[C# x86 Built-in] 92.53864 ms elapsed.
+
+[C# x64] 85.56388 ms elapsed.
+[C# x64 3-way] 84.82775 ms elapsed.
+[C# x64 Built-in] 72.35709 ms elapsed.
+
+[Java] 109.8 ms elapsed.
+[Java 3-way] 78.0 ms elapsed.
+[Java Built-in] 67.4 ms elapsed.
+
+[Node.js] 118 ms elapsed.
+[Node.js 3-way] 132.5 ms elapsed.
+[Node.js Built-in] 208.8 ms elapsed.
 ```
