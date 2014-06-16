@@ -35,7 +35,7 @@ public final class Program {
   static long run(int[] a, long seed, boolean threeway, boolean builtin) {
     Random random = new Random(seed);
     for (int i = 0; i < a.length; i++) {
-      a[i] = random.nextInt();
+      a[i] = random.nextInt(Short.MAX_VALUE + 1);
     }
     long begin;
     if (threeway) {
@@ -116,3 +116,4 @@ public final class Program {
     return true;
   }
 }
+

@@ -111,4 +111,3 @@ function run(a, seed, threeway, builtin) {
   var mean = sum / (iter - trim * 2);
   console.log(mean + ' ms elapsed.');
 })();
-
