@@ -33,11 +33,11 @@ echo|set /p=[C# Built-in x64]
 .\CSSort\bin\x64\Release\CSSort.exe builtin
 
 
-rem JavaScript
+rem Node.js
 
-echo|set /p=[JavaScript] 
+echo|set /p=[Node.js] 
 node .\JSSort\program.js
-echo|set /p=[JavaScript Built-in] 
+echo|set /p=[Node.js Built-in] 
 node .\JSSort\program.js builtin
 
 
