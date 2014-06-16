@@ -1,4 +1,4 @@
-# C++와 C#, 그리고 Node.js 정렬 성능 비교
+# C++와 C#, Java, 그리고 Node.js 정렬 성능 비교
 
 ## 준비
 
@@ -40,6 +40,6 @@
 [C# Built-in x64] 67.99592 ms elapsed.
 [Java] 98.5 ms elapsed.
 [Java Built-in] 67.0 ms elapsed.
-[JavaScript] 110.9 ms elapsed.
-[JavaScript Built-in] 196.8 ms elapsed.
+[Node.js] 110.9 ms elapsed.
+[Node.js Built-in] 196.8 ms elapsed.
 ```
