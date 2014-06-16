@@ -39,3 +39,11 @@ echo|set /p=[JavaScript]
 node .\JSSort\program.js
 echo|set /p=[JavaScript Built-in] 
 node .\JSSort\program.js builtin
+
+
+rem Java
+
+echo|set /p=[Java] 
+java -cp .\JSort\bin Program
+echo|set /p=[Java Built-in] 
+java -cp .\JSort\bin Program builtin
