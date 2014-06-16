@@ -65,16 +65,16 @@ function run(a, seed, builtin) {
   process.argv.forEach(function (arg) {
     if (arg === 'builtin') {
       builtin = true;
-	  return false;
+      return false;
     }
   });
   var iter = 12, trim = 1, elapsed = new Array(iter), sum = 0, i;
   for (i = 0; i < iter; i++) {
-  	elapsed[i] = run(a, 1, builtin);
+    elapsed[i] = run(a, 1, builtin);
   }
   elapsed.sort(function (x, y) { return x - y; });
   for (i = trim; i < iter - trim * 2; i++) {
-  	sum += elapsed[i];
+    sum += elapsed[i];
   }
   var mean = sum / (iter - trim * 2);
   console.log(mean + ' ms elapsed.');
