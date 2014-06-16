@@ -4,9 +4,9 @@ rem C++ x86
 
 echo|set /p=[C++ x86] 
 .\Release\CPPSort.exe
-echo|set /p=[C++ 3-way x86] 
+echo|set /p=[C++ x86 3-way] 
 .\Release\CPPSort.exe threeway
-echo|set /p=[C++ Built-in x86] 
+echo|set /p=[C++ x86 Built-in] 
 .\Release\CPPSort.exe builtin
 
 
@@ -17,9 +17,9 @@ rem C++ x64
 
 echo|set /p=[C++ x64] 
 .\x64\Release\CPPSort.exe
-echo|set /p=[C++ 3-way Built-in x64] 
+echo|set /p=[C++ x64 3-way Built-in] 
 .\x64\Release\CPPSort.exe threeway
-echo|set /p=[C++ Built-in x64] 
+echo|set /p=[C++ x64 Built-in] 
 .\x64\Release\CPPSort.exe builtin
 
 
@@ -30,9 +30,9 @@ rem C# x86
 
 echo|set /p=[C# x86] 
 .\CSSort\bin\x86\Release\CSSort.exe
-echo|set /p=[C# 3-way x86] 
+echo|set /p=[C# x86 3-way] 
 .\CSSort\bin\x86\Release\CSSort.exe threeway
-echo|set /p=[C# Built-in x86] 
+echo|set /p=[C# x86 Built-in] 
 .\CSSort\bin\x86\Release\CSSort.exe builtin
 
 
@@ -43,9 +43,9 @@ rem C# x64
 
 echo|set /p=[C# x64] 
 .\CSSort\bin\x64\Release\CSSort.exe
-echo|set /p=[C# 3-way x64] 
+echo|set /p=[C# x64 3-way] 
 .\CSSort\bin\x64\Release\CSSort.exe threeway
-echo|set /p=[C# Built-in x64] 
+echo|set /p=[C# x64 Built-in] 
 .\CSSort\bin\x64\Release\CSSort.exe builtin
 
 
