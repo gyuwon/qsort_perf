@@ -6,9 +6,13 @@ public final class Program {
   public static void main(String[] args) {
     final int n = 1000000;
     int[] a = new int[n];
-    boolean builtin = false;
+    boolean threeway = false, builtin = false;
     for (int i = 0; i < args.length; i++) {
-      if ("builtin".equals(args[i])) {
+      if ("threeway".equals(args[i])) {
+        threeway = true;
+        break;
+      }
+      else if ("builtin".equals(args[i])) {
         builtin = true;
 	break;
       }
@@ -17,7 +21,7 @@ public final class Program {
     final int trim = 1;
     long[] elapsed = new long[iter];
     for (int i = 0; i < iter; i++) {
-      elapsed[i] = run(a, n, builtin);
+      elapsed[i] = run(a, new Random().nextInt(), threeway, builtin);
     }
     Arrays.sort(elapsed);
     long sum = 0;
@@ -28,19 +32,23 @@ public final class Program {
     System.out.println(mean + " ms elapsed.");
   }
 
-  static long run(int[] a, long seed, boolean builtin) {
+  static long run(int[] a, long seed, boolean threeway, boolean builtin) {
     Random random = new Random(seed);
     for (int i = 0; i < a.length; i++) {
       a[i] = random.nextInt();
     }
     long begin;
-    if (builtin) {
+    if (threeway) {
+      begin = System.currentTimeMillis();
+      quicksortThreeway(a, 0, a.length);
+    }
+    else if (builtin) {
       begin = System.currentTimeMillis();
       Arrays.sort(a);
     }
     else {
       begin = System.currentTimeMillis();
-      quicksortThreeway(a, 0, a.length);
+      quicksort(a, 0, a.length);
     }
     long elapsed = System.currentTimeMillis() - begin;
     if (isSorted(a) == false) {

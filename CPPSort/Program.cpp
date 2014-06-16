@@ -8,15 +8,21 @@ using namespace std;
 void quicksort(int *a, size_t n);
 void quicksort_threeway(int *a, size_t start, size_t end);
 bool is_sorted(int *a, size_t n);
-clock_t run(int *a, size_t n, int seed, bool builtin);
+clock_t run(int *a, size_t n, int seed, bool threeway, bool builtin);
 
 int main(size_t argc, char *argv[])
 {
 	const size_t n = 1000000;
+	auto threeway = false;
 	auto builtin = false;
 	for (size_t i = 0; i < argc; i++)
 	{
-		if (strcmp(argv[i], "builtin") == 0)
+		if (strcmp(argv[i], "threeway") == 0)
+		{
+			threeway = true;
+			break;
+		}
+		else if (strcmp(argv[i], "builtin") == 0)
 		{
 			builtin = true;
 			break;
@@ -29,7 +35,7 @@ int main(size_t argc, char *argv[])
 		clock_t elapsed[iter];
 		for (size_t i = 0; i < iter; i++)
 		{
-			elapsed[i] = run(a, n, 1, builtin);
+			elapsed[i] = run(a, n, (int)time(NULL), threeway, builtin);
 		}
 		sort(elapsed, elapsed + iter);
 		clock_t sum = 0;
@@ -47,7 +53,7 @@ int main(size_t argc, char *argv[])
 	}
 }
 
-clock_t run(int *a, size_t n, int seed, bool builtin)
+clock_t run(int *a, size_t n, int seed, bool threeway, bool builtin)
 {
 	srand(seed);
 	for (size_t i = 0; i < n; i++)
@@ -55,7 +61,12 @@ clock_t run(int *a, size_t n, int seed, bool builtin)
 		a[i] = rand();
 	}
 	clock_t begin;
-	if (builtin)
+	if (threeway)
+	{
+		begin = clock();
+		quicksort_threeway(a, 0, n);
+	}
+	else if (builtin)
 	{
 		begin = clock();
 		sort(a, a + n);
@@ -63,7 +74,7 @@ clock_t run(int *a, size_t n, int seed, bool builtin)
 	else
 	{
 		begin = clock();
-		quicksort_threeway(a, 0, n);
+		quicksort(a, n);
 	}
 	auto elapsed = clock() - begin;
 	if (is_sorted(a, n) == false)

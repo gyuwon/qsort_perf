@@ -62,20 +62,24 @@ function isSorted(a) {
   return true;
 }
 
-function run(a, seed, builtin) {
-  srand.seed((Math.random() * 65536) >> 0);
+function run(a, seed, threeway, builtin) {
+  srand.seed(seed);
   var n = a.length
   for (var i = 0; i < n; i++) {
     a[i] = srand.rand();
   }
   var begin;
-  if (builtin) {
+  if (threeway) {
+    begin = new Date();
+    quicksortThreeway(a, 0, n);
+  }
+  else if (builtin) {
     begin = new Date();
     a.sort(function (x, y) { return x - y; });
   }
   else {
     begin = new Date();
-    quicksortThreeway(a, 0, n);
+    quicksort(a, 0, n);
   }
   var elapsed = new Date() - begin;
   if (isSorted(a) !== true) {
@@ -85,16 +89,20 @@ function run(a, seed, builtin) {
 }
 
 (function () {
-  var n = 1000000, a = new Array(n), builtin = false;
+  var n = 1000000, a = new Array(n), threeway = false, builtin = false;
   process.argv.forEach(function (arg) {
-    if (arg === 'builtin') {
+    if (arg === 'threeway') {
+      threeway = true;
+      return false;
+    }
+    else if (arg === 'builtin') {
       builtin = true;
       return false;
     }
   });
   var iter = 12, trim = 1, elapsed = new Array(iter), sum = 0, i;
   for (i = 0; i < iter; i++) {
-    elapsed[i] = run(a, 1, builtin);
+    elapsed[i] = run(a, (Math.random() * 65536) >> 0, builtin);
   }
   elapsed.sort(function (x, y) { return x - y; });
   for (i = trim; i < iter - trim * 2; i++) {
