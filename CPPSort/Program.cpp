@@ -6,16 +6,23 @@
 using namespace std;
 
 void quicksort(int *a, size_t n);
+void quicksort_threeway(int *a, size_t start, size_t end);
 bool is_sorted(int *a, size_t n);
-clock_t run(int *a, size_t n, int seed, bool builtin);
+clock_t run(int *a, size_t n, int seed, bool threeway, bool builtin);
 
 int main(size_t argc, char *argv[])
 {
 	const size_t n = 1000000;
+	auto threeway = false;
 	auto builtin = false;
 	for (size_t i = 0; i < argc; i++)
 	{
-		if (strcmp(argv[i], "builtin") == 0)
+		if (strcmp(argv[i], "threeway") == 0)
+		{
+			threeway = true;
+			break;
+		}
+		else if (strcmp(argv[i], "builtin") == 0)
 		{
 			builtin = true;
 			break;
@@ -28,7 +35,7 @@ int main(size_t argc, char *argv[])
 		clock_t elapsed[iter];
 		for (size_t i = 0; i < iter; i++)
 		{
-			elapsed[i] = run(a, n, 1, builtin);
+			elapsed[i] = run(a, n, (int)time(NULL), threeway, builtin);
 		}
 		sort(elapsed, elapsed + iter);
 		clock_t sum = 0;
@@ -46,7 +53,7 @@ int main(size_t argc, char *argv[])
 	}
 }
 
-clock_t run(int *a, size_t n, int seed, bool builtin)
+clock_t run(int *a, size_t n, int seed, bool threeway, bool builtin)
 {
 	srand(seed);
 	for (size_t i = 0; i < n; i++)
@@ -54,7 +61,12 @@ clock_t run(int *a, size_t n, int seed, bool builtin)
 		a[i] = rand();
 	}
 	clock_t begin;
-	if (builtin)
+	if (threeway)
+	{
+		begin = clock();
+		quicksort_threeway(a, 0, n);
+	}
+	else if (builtin)
 	{
 		begin = clock();
 		sort(a, a + n);
@@ -99,6 +111,37 @@ void quicksort(int *a, size_t n)
 	}
 	quicksort(a, r - a + 1);
 	quicksort(l, a + n - l);
+}
+
+void quicksort_threeway(int *a, size_t start, size_t end)
+{
+	if (end - start < 2)
+	{
+		return;
+	}
+	int p = a[start + (end - start) / 2];
+	size_t l = start;
+	size_t r = end - 1;
+	while (l <= r)
+	{
+		if (a[l] < p)
+		{
+			++l;
+			continue;
+		}
+		if (a[r] > p)
+		{
+			--r;
+			continue;
+		}
+		int t = a[l];
+		a[l] = a[r];
+		a[r] = t;
+		++l;
+		--r;
+	}
+	quicksort_threeway(a, start, r + 1);
+	quicksort_threeway(a, r + 1, end);
 }
 
 bool is_sorted(int *a, size_t n)
