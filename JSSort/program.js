@@ -28,6 +28,30 @@ function quicksort(a, start, end) {
   quicksort(a, r + 1, end);
 }
 
+function quicksortThreeway(a, start, end) {
+    if (end - start < 2) {
+      return;
+    }
+    var p = a[start];
+    var l = start;
+    var m = l + 1;
+    var i = m;
+    while (i < end) {
+      if (a[i] < p) {
+        a[l++] = a[i];
+        a[i] = a[m];
+        a[m++] = p;
+      }
+      else if (a[i] == p) {
+        a[i] = a[m];
+        a[m++] = p;
+      }
+      ++i;
+    }
+    quicksortThreeway(a, start, l);
+    quicksortThreeway(a, m, end);
+}
+
 function isSorted(a) {
   var n = a.length;
   for (var i = 1; i < n; i++) {
@@ -39,7 +63,7 @@ function isSorted(a) {
 }
 
 function run(a, seed, builtin) {
-  srand.seed(seed);
+  srand.seed((Math.random() * 65536) >> 0);
   var n = a.length
   for (var i = 0; i < n; i++) {
     a[i] = srand.rand();
@@ -51,7 +75,7 @@ function run(a, seed, builtin) {
   }
   else {
     begin = new Date();
-    quicksort(a, 0, n);
+    quicksortThreeway(a, 0, n);
   }
   var elapsed = new Date() - begin;
   if (isSorted(a) !== true) {

@@ -40,7 +40,7 @@ public final class Program {
     }
     else {
       begin = System.currentTimeMillis();
-      quicksort(a, 0, a.length);
+      quicksortThreeway(a, 0, a.length);
     }
     long elapsed = System.currentTimeMillis() - begin;
     if (isSorted(a) == false) {
@@ -73,6 +73,30 @@ public final class Program {
     }
     quicksort(a, start, r + 1);
     quicksort(a, r + 1, end);
+  }
+
+  static void quicksortThreeway(int[] a, int start, int end) {
+    if (end - start < 2) {
+      return;
+    }
+    int p = a[start];
+    int l = start;
+    int m = l + 1;
+    int i = m;
+    while (i < end) {
+      if (a[i] < p) {
+        a[l++] = a[i];
+        a[i] = a[m];
+        a[m++] = p;
+      }
+      else if (a[i] == p) {
+        a[i] = a[m];
+        a[m++] = p;
+      }
+      ++i;
+    }
+    quicksortThreeway(a, start, l);
+    quicksortThreeway(a, m, end);
   }
 
   static boolean isSorted(int[] array) {

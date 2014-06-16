@@ -38,6 +38,37 @@ namespace CSSort
             Quicksort(a, r + 1, end);
         }
 
+        static void QuicksortThreeway(int[] a, int start, int end)
+        {
+            if (end - start < 2)
+            {
+                return;
+            }
+            int p = a[start + (end - start) / 2];
+            int l = start;
+            int r = end - 1;
+            while (l <= r)
+            {
+                if (a[l] < p)
+                {
+                    ++l;
+                    continue;
+                }
+                if (a[r] > p)
+                {
+                    --r;
+                    continue;
+                }
+                int t = a[l];
+                a[l] = a[r];
+                a[r] = t;
+                ++l;
+                --r;
+            }
+            QuicksortThreeway(a, start, r + 1);
+            QuicksortThreeway(a, r + 1, end);
+        }
+
         static void Main(string[] args)
         {
             var n = 1000000;
@@ -67,7 +98,7 @@ namespace CSSort
             else
             {
                 stopwatch = Stopwatch.StartNew();
-                Quicksort(a, 0, a.Length);
+                QuicksortThreeway(a, 0, a.Length);
             }
             stopwatch.Stop();
             var elapsed = stopwatch.Elapsed.TotalMilliseconds;

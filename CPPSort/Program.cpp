@@ -6,6 +6,7 @@
 using namespace std;
 
 void quicksort(int *a, size_t n);
+void quicksort_threeway(int *a, size_t start, size_t end);
 bool is_sorted(int *a, size_t n);
 clock_t run(int *a, size_t n, int seed, bool builtin);
 
@@ -62,7 +63,7 @@ clock_t run(int *a, size_t n, int seed, bool builtin)
 	else
 	{
 		begin = clock();
-		quicksort(a, n);
+		quicksort_threeway(a, 0, n);
 	}
 	auto elapsed = clock() - begin;
 	if (is_sorted(a, n) == false)
@@ -99,6 +100,37 @@ void quicksort(int *a, size_t n)
 	}
 	quicksort(a, r - a + 1);
 	quicksort(l, a + n - l);
+}
+
+void quicksort_threeway(int *a, size_t start, size_t end)
+{
+	if (end - start < 2)
+	{
+		return;
+	}
+	int p = a[start + (end - start) / 2];
+	size_t l = start;
+	size_t r = end - 1;
+	while (l <= r)
+	{
+		if (a[l] < p)
+		{
+			++l;
+			continue;
+		}
+		if (a[r] > p)
+		{
+			--r;
+			continue;
+		}
+		int t = a[l];
+		a[l] = a[r];
+		a[r] = t;
+		++l;
+		--r;
+	}
+	quicksort_threeway(a, start, r + 1);
+	quicksort_threeway(a, r + 1, end);
 }
 
 bool is_sorted(int *a, size_t n)
