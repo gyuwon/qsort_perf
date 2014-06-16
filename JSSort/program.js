@@ -102,7 +102,7 @@ function run(a, seed, threeway, builtin) {
   });
   var iter = 12, trim = 1, elapsed = new Array(iter), sum = 0, i;
   for (i = 0; i < iter; i++) {
-    elapsed[i] = run(a, (Math.random() * 65536) >> 0, builtin);
+    elapsed[i] = run(a, (Math.random() * 65536) >> 0, threeway, builtin);
   }
   elapsed.sort(function (x, y) { return x - y; });
   for (i = trim; i < iter - trim * 2; i++) {
