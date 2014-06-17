@@ -44,29 +44,27 @@ namespace CSSort
             {
                 return;
             }
-            int p = a[start + (end - start) / 2];
+            int p = a[start];
             int l = start;
-            int r = end - 1;
-            while (l <= r)
+            int m = l + 1;
+            int i = m;
+            while (i < end)
             {
-                if (a[l] < p)
+                if (a[i] < p)
                 {
-                    ++l;
-                    continue;
+                    a[l++] = a[i];
+                    a[i] = a[m];
+                    a[m++] = p;
                 }
-                if (a[r] > p)
+                else if (a[i] == p)
                 {
-                    --r;
-                    continue;
+                    a[i] = a[m];
+                    a[m++] = p;
                 }
-                int t = a[l];
-                a[l] = a[r];
-                a[r] = t;
-                ++l;
-                --r;
+                ++i;
             }
-            QuicksortThreeway(a, start, r + 1);
-            QuicksortThreeway(a, r + 1, end);
+            QuicksortThreeway(a, start, l);
+            QuicksortThreeway(a, m, end);
         }
 
         static void Main(string[] args)

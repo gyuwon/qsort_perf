@@ -119,29 +119,27 @@ void quicksort_threeway(int *a, size_t start, size_t end)
 	{
 		return;
 	}
-	int p = a[start + (end - start) / 2];
-	size_t l = start;
-	size_t r = end - 1;
-	while (l <= r)
+	auto p = a[start];
+	auto l = start;
+	auto m = l + 1;
+	auto i = m;
+	while (i < end)
 	{
-		if (a[l] < p)
+		if (a[i] < p)
 		{
-			++l;
-			continue;
+			a[l++] = a[i];
+			a[i] = a[m];
+			a[m++] = p;
 		}
-		if (a[r] > p)
+		else if (a[i] == p)
 		{
-			--r;
-			continue;
+			a[i] = a[m];
+			a[m++] = p;
 		}
-		int t = a[l];
-		a[l] = a[r];
-		a[r] = t;
-		++l;
-		--r;
+		++i;
 	}
-	quicksort_threeway(a, start, r + 1);
-	quicksort_threeway(a, r + 1, end);
+	quicksort_threeway(a, start, l);
+	quicksort_threeway(a, m, end);
 }
 
 bool is_sorted(int *a, size_t n)
