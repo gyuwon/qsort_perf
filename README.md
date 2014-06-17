@@ -30,27 +30,27 @@
 다음과 유사한 결과가 출력됩니다.
 
 ```text
-[C++ x86] 60.1 ms elapsed.
-[C++ x86 3-way] 66.6 ms elapsed.
-[C++ x86 Built-in] 65.7 ms elapsed.
+[C++ x86] 56.3 ms elapsed.
+[C++ x86 3-way] 65.8 ms elapsed.
+[C++ x86 Built-in] 57.8 ms elapsed.
 
-[C++ x64] 61.5 ms elapsed.
-[C++ x64 3-way Built-in] 62.6 ms elapsed.
-[C++ x64 Built-in] 61.8 ms elapsed.
+[C++ x64] 56.5 ms elapsed.
+[C++ x64 3-way Built-in] 56.5 ms elapsed.
+[C++ x64 Built-in] 56.3 ms elapsed.
 
-[C# x86] 95.76737 ms elapsed.
-[C# x86 3-way] 95.08319 ms elapsed.
-[C# x86 Built-in] 92.53864 ms elapsed.
+[C# x86] 89.86186 ms elapsed.
+[C# x86 3-way] 89.29654 ms elapsed.
+[C# x86 Built-in] 85.36955 ms elapsed.
 
-[C# x64] 85.56388 ms elapsed.
-[C# x64 3-way] 84.82775 ms elapsed.
-[C# x64 Built-in] 72.35709 ms elapsed.
+[C# x64] 81.70353 ms elapsed.
+[C# x64 3-way] 81.56661 ms elapsed.
+[C# x64 Built-in] 67.76517 ms elapsed.
 
-[Java] 109.8 ms elapsed.
-[Java 3-way] 78.0 ms elapsed.
-[Java Built-in] 67.4 ms elapsed.
+[Java] 84.5 ms elapsed.
+[Java 3-way] 51.5 ms elapsed.
+[Java Built-in] 56.3 ms elapsed.
 
-[Node.js] 118 ms elapsed.
-[Node.js 3-way] 132.5 ms elapsed.
-[Node.js Built-in] 208.8 ms elapsed.
+[Node.js] 112.4 ms elapsed.
+[Node.js 3-way] 126.7 ms elapsed.
+[Node.js Built-in] 195.4 ms elapsed.
 ```
