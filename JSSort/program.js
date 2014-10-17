@@ -105,7 +105,7 @@ function run(a, seed, threeway, builtin) {
     elapsed[i] = run(a, (Math.random() * 65536) >> 0, threeway, builtin);
   }
   elapsed.sort(function (x, y) { return x - y; });
-  for (i = trim; i < iter - trim * 2; i++) {
+  for (i = trim; i <= iter - trim * 2; i++) {
     sum += elapsed[i];
   }
   var mean = sum / (iter - trim * 2);

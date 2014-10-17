@@ -25,7 +25,7 @@ public final class Program {
     }
     Arrays.sort(elapsed);
     long sum = 0;
-    for (int i = trim; i < iter - trim * 2; i++) {
+    for (int i = trim; i <= iter - trim * 2; i++) {
       sum += elapsed[i];
     }
     double mean = ((double)sum) / (iter - trim * 2);
